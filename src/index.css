@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0F172A;
+  --primary-light: #1E293B;
+  --accent: #F59E0B;
+  --accent-light: #FBBF24;
+  --background: #F8FAFC;
+  --text: #0F172A;
+  --text-light: #475569;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-background text-text font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-primary;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl leading-tight;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl leading-tight;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+  
+  p {
+    @apply text-text-light leading-relaxed;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-primary-light px-4 py-2;
+  }
+  
+  .btn-accent {
+    @apply btn bg-accent text-primary hover:bg-accent-light px-4 py-2;
+  }
+  
+  .btn-outline {
+    @apply btn border border-primary text-primary hover:bg-primary hover:text-white px-4 py-2;
+  }
+  
+  .container-custom {
+    @apply mx-auto px-4 max-w-7xl;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow overflow-hidden transition-all duration-300;
+  }
+  
+  .input {
+    @apply block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
+  }
+  
+  .photo-card {
+    @apply card hover:shadow-lg;
+  }
+  
+  .photo-card img {
+    @apply w-full object-cover transition-transform duration-500;
+  }
+  
+  .photo-card:hover img {
+    @apply scale-105;
+  }
+  
+  .watermark {
+    @apply absolute inset-0 flex items-center justify-center opacity-50 pointer-events-none;
+  }
+  
+  .album-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
+  }
+}
