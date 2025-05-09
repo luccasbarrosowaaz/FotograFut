@@ -28,13 +28,13 @@ const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+        isScrolled ? 'bg-white shadow-md py-2' : 'bg-primary py-4'
       }`}
     >
       <div className="container-custom flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <Camera className="h-8 w-8 text-accent" strokeWidth={2} />
+          <Camera className={`h-8 w-8 ${isScrolled ? 'text-accent' : 'text-accent'}`} strokeWidth={2} />
           <span className={`font-bold text-xl ${isScrolled ? 'text-primary' : 'text-white'}`}>
             O Jogo Photo
           </span>
@@ -42,6 +42,14 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
+          <Link 
+            to="/seja-fotografo" 
+            className={`font-medium transition-colors ${
+              isScrolled ? 'text-primary hover:text-accent' : 'text-white hover:text-accent'
+            }`}
+          >
+            Seja um Fotógrafo
+          </Link>
           <Link 
             to="/albuns" 
             className={`font-medium transition-colors ${
@@ -129,6 +137,9 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 py-4 animate-fade-in">
           <div className="container-custom flex flex-col space-y-4">
+            <Link to="/seja-fotografo" className="font-medium py-2 text-primary hover:text-accent">
+              Seja um Fotógrafo
+            </Link>
             <Link to="/albuns" className="font-medium py-2 text-primary hover:text-accent">
               Álbuns
             </Link>
