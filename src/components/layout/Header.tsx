@@ -10,7 +10,6 @@ const Header = () => {
   const { isAuthenticated, user } = useAuthStore();
   const { getItemsCount } = useCartStore();
   
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -20,7 +19,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Close menu when location changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
@@ -28,19 +26,17 @@ const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-primary py-4'
+        isScrolled ? 'bg-white shadow-md py-2' : 'bg-[#0A2463] py-4'
       }`}
     >
       <div className="container-custom flex items-center justify-between">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <Camera className={`h-8 w-8 ${isScrolled ? 'text-accent' : 'text-accent'}`} strokeWidth={2} />
           <span className={`font-bold text-xl ${isScrolled ? 'text-primary' : 'text-white'}`}>
-            O Jogo Photo
+            FOTOGRAFUT
           </span>
         </Link>
         
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           <Link 
             to="/seja-fotografo" 
@@ -59,14 +55,6 @@ const Header = () => {
             Álbuns
           </Link>
           <Link 
-            to="/fotografos" 
-            className={`font-medium transition-colors ${
-              isScrolled ? 'text-primary hover:text-accent' : 'text-white hover:text-accent'
-            }`}
-          >
-            Fotógrafos
-          </Link>
-          <Link 
             to="/sobre" 
             className={`font-medium transition-colors ${
               isScrolled ? 'text-primary hover:text-accent' : 'text-white hover:text-accent'
@@ -82,9 +70,18 @@ const Header = () => {
           >
             Contato
           </Link>
+          <a 
+            href="https://wa.me/5513991835083?text=vim%20da%20fotografut%2C%20gostaria%20de%20falar%20sobre"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`font-medium transition-colors ${
+              isScrolled ? 'text-primary hover:text-accent' : 'text-white hover:text-accent'
+            }`}
+          >
+            +55 13 99183-5083
+          </a>
         </nav>
         
-        {/* User actions */}
         <div className="hidden md:flex items-center space-x-4">
           <Link 
             to="/carrinho" 
@@ -120,7 +117,6 @@ const Header = () => {
           )}
         </div>
         
-        {/* Mobile menu button */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="md:hidden p-2"
@@ -133,7 +129,6 @@ const Header = () => {
         </button>
       </div>
       
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 py-4 animate-fade-in">
           <div className="container-custom flex flex-col space-y-4">
@@ -143,15 +138,20 @@ const Header = () => {
             <Link to="/albuns" className="font-medium py-2 text-primary hover:text-accent">
               Álbuns
             </Link>
-            <Link to="/fotografos" className="font-medium py-2 text-primary hover:text-accent">
-              Fotógrafos
-            </Link>
             <Link to="/sobre" className="font-medium py-2 text-primary hover:text-accent">
               Sobre
             </Link>
             <Link to="/contato" className="font-medium py-2 text-primary hover:text-accent">
               Contato
             </Link>
+            <a 
+              href="https://wa.me/5513991835083?text=vim%20da%20fotografut%2C%20gostaria%20de%20falar%20sobre"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium py-2 text-primary hover:text-accent"
+            >
+              +55 13 99183-5083
+            </a>
             
             <div className="flex items-center space-x-4 pt-2 border-t border-gray-200">
               <Link to="/carrinho" className="relative p-2 rounded-full text-primary">
