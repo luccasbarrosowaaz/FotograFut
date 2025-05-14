@@ -1,5 +1,5 @@
-import { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 
@@ -16,8 +16,19 @@ const CustomerDashboardPage = lazy(() => import('./pages/dashboard/CustomerDashb
 const PhotographerDashboardPage = lazy(() => import('./pages/dashboard/PhotographerDashboardPage'));
 const AdminDashboardPage = lazy(() => import('./pages/dashboard/AdminDashboardPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const BePhotographerPage = lazy(() => import('./pages/BePhotographerPage'));
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <Layout>
       <Suspense fallback={<LoadingSpinner />}>
@@ -33,6 +44,11 @@ function App() {
           <Route path="/cliente/painel" element={<CustomerDashboardPage />} />
           <Route path="/fotografo/painel" element={<PhotographerDashboardPage />} />
           <Route path="/admin/painel" element={<AdminDashboardPage />} />
+          <Route path="/sobre" element={<AboutPage />} />
+          <Route path="/contato" element={<ContactPage />} />
+          <Route path="/termos" element={<TermsPage />} />
+          <Route path="/privacidade" element={<PrivacyPage />} />
+          <Route path="/seja-fotografo" element={<BePhotographerPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
