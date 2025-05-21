@@ -21,6 +21,9 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const BePhotographerPage = lazy(() => import('./pages/BePhotographerPage'));
+const PhotographersPage = lazy(() => import('./pages/PhotographersPage'));
+const PlansPage = lazy(() => import('./pages/PlansPage'));
+const PlanCheckoutPage = lazy(() => import('./pages/PlanCheckoutPage'));
 
 function App() {
   const location = useLocation();
@@ -36,6 +39,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/albuns" element={<AlbumsPage />} />
           <Route path="/albuns/:albumId" element={<AlbumDetailPage />} />
+          <Route path="/fotografos" element={<PhotographersPage />} />
           <Route path="/fotografo/:photographerId" element={<PhotographerProfilePage />} />
           <Route path="/carrinho" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
@@ -49,6 +53,8 @@ function App() {
           <Route path="/termos" element={<TermsPage />} />
           <Route path="/privacidade" element={<PrivacyPage />} />
           <Route path="/seja-fotografo" element={<BePhotographerPage />} />
+          <Route path="/planos" element={<PlansPage />} />
+          <Route path="/planos/checkout/:planId" element={<PlanCheckoutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
