@@ -70,16 +70,6 @@ const Header = () => {
           >
             Contato
           </Link>
-          <a 
-            href="https://wa.me/5513991835083?text=vim%20da%20fotografut%2C%20gostaria%20de%20falar%20sobre"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`font-medium transition-colors ${
-              isScrolled ? 'text-primary hover:text-accent' : 'text-white hover:text-accent'
-            }`}
-          >
-            +55 13 99183-5083
-          </a>
         </nav>
         
         <div className="hidden md:flex items-center space-x-4">
@@ -110,7 +100,11 @@ const Header = () => {
           ) : (
             <Link 
               to="/entrar" 
-              className={`btn ${isScrolled ? 'btn-primary' : 'bg-white text-primary hover:bg-white/90'}`}
+              className={`btn px-6 py-2 rounded-full font-medium transition-all ${
+                isScrolled 
+                  ? 'bg-accent text-white hover:bg-accent-light' 
+                  : 'bg-white text-primary hover:bg-white/90'
+              }`}
             >
               Entrar
             </Link>
@@ -144,14 +138,6 @@ const Header = () => {
             <Link to="/contato" className="font-medium py-2 text-primary hover:text-accent">
               Contato
             </Link>
-            <a 
-              href="https://wa.me/5513991835083?text=vim%20da%20fotografut%2C%20gostaria%20de%20falar%20sobre"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium py-2 text-primary hover:text-accent"
-            >
-              +55 13 99183-5083
-            </a>
             
             <div className="flex items-center space-x-4 pt-2 border-t border-gray-200">
               <Link to="/carrinho" className="relative p-2 rounded-full text-primary">
@@ -172,7 +158,7 @@ const Header = () => {
                   <span className="font-medium">{user?.name.split(' ')[0]}</span>
                 </Link>
               ) : (
-                <Link to="/entrar" className="btn btn-primary">
+                <Link to="/entrar" className="btn-accent w-full text-center py-2">
                   Entrar
                 </Link>
               )}

@@ -15,10 +15,28 @@
 @layer base {
   html {
     @apply scroll-smooth;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   
   body {
     @apply bg-background text-text font-sans;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -48,19 +66,19 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
   
   .btn-primary {
-    @apply btn bg-primary text-white hover:bg-primary-light px-4 py-2;
+    @apply btn bg-primary text-white hover:bg-primary-light px-4 py-2 rounded-full;
   }
   
   .btn-accent {
-    @apply btn bg-accent text-primary hover:bg-accent-light px-4 py-2;
+    @apply btn bg-accent text-primary hover:bg-accent-light px-4 py-2 rounded-full;
   }
   
   .btn-outline {
-    @apply btn border border-primary text-primary hover:bg-primary hover:text-white px-4 py-2;
+    @apply btn border border-primary text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-full;
   }
   
   .container-custom {
@@ -72,7 +90,7 @@
   }
   
   .input {
-    @apply block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
+    @apply block w-full rounded-full border border-gray-300 px-4 py-2 shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
   }
   
   .photo-card {
@@ -89,9 +107,22 @@
   
   .watermark {
     @apply absolute inset-0 flex items-center justify-center opacity-50 pointer-events-none;
+    background: linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1) 75%, transparent 75%, transparent);
+    background-size: 4px 4px;
+  }
+  
+  .watermark::after {
+    content: attr(data-watermark);
+    @apply text-white font-bold text-xl opacity-80 rotate-[-30deg] select-none pointer-events-none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   }
   
   .album-grid {
     @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
   }
+}
+
+/* Disable context menu */
+body {
+  oncontextmenu: 'return false';
 }

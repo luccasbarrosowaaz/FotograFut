@@ -32,6 +32,33 @@ function App() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  // Disable right click
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Disable PrintScreen
+      if (e.key === 'PrintScreen') {
+        e.preventDefault();
+      }
+      
+      // Disable Ctrl+P
+      if (e.ctrlKey && e.key === 'p') {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('contextmenu', handleContextMenu);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('contextmenu', handleContextMenu);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <Layout>
       <Suspense fallback={<LoadingSpinner />}>
