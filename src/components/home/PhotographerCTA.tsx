@@ -1,7 +1,20 @@
-import { Link } from 'react-router-dom';
-import { CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { CheckCircle2, Camera } from 'lucide-react';
+import { useAuthStore } from '../../lib/store';
 
 const PhotographerCTA = () => {
+  const { isAuthenticated } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleBePhotographer = () => {
+    if (!isAuthenticated) {
+      navigate('/entrar?redirect=seja-fotografo');
+      return;
+    }
+    navigate('/seja-fotografo');
+  };
+
   const benefits = [
     'Alcance nacional para suas fotografias esportivas',
     'Gerencie seus próprios preços e álbuns',
@@ -9,36 +22,6 @@ const PhotographerCTA = () => {
     'Relatórios detalhados de vendas e desempenho',
     'Marca d\'água automática em todas as fotos',
     'Suporte técnico especializado para fotógrafos'
-  ];
-  
-  const plans = [
-    {
-      name: 'Plano Vitalício',
-      price: 'R$ 1.500,00',
-      subscription: 'R$ 29,90/mês',
-      features: [
-        'Acesso vitalício à plataforma',
-        'Upload ilimitado de fotos',
-        'Sem comissão nas vendas',
-        'Relatórios detalhados de vendas',
-        'URL personalizada',
-        'Suporte prioritário'
-      ],
-      popular: true
-    },
-    {
-      name: 'Plano Gratuito',
-      price: 'R$ 0,00',
-      subscription: 'Sem mensalidade',
-      features: [
-        'Comissão de 30% por foto vendida',
-        'Upload ilimitado de fotos',
-        'Relatórios básicos de vendas',
-        'URL personalizada',
-        'Suporte por e-mail'
-      ],
-      popular: false
-    }
   ];
 
   return (
@@ -63,51 +46,88 @@ const PhotographerCTA = () => {
               ))}
             </ul>
             
-            <Link to="/cadastro/fotografo" className="btn-primary">
+            <button 
+              onClick={handleBePhotographer}
+              className="btn-primary"
+            >
               Cadastrar como Fotógrafo
-            </Link>
+            </button>
           </div>
           
           {/* Right side pricing */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {plans.map((plan, index) => (
-              <div 
-                key={index} 
-                className={`card p-6 border ${
-                  plan.popular ? 'border-accent shadow-lg relative' : 'border-gray-200'
-                }`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3 right-6 bg-accent text-primary text-xs font-bold px-3 py-1 rounded-full">
-                    Popular
-                  </div>
-                )}
-                
-                <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
-                <div className="mb-4">
-                  <span className="text-3xl font-bold">{plan.price}</span>
-                  {plan.subscription && (
-                    <div className="text-sm text-text-light mt-1">+ {plan.subscription}</div>
-                  )}
-                </div>
-                
-                <ul className="space-y-2 mb-6">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start text-sm">
-                      <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <Link 
-                  to="/cadastro/fotografo" 
-                  className={`btn w-full ${plan.popular ? 'btn-accent' : 'btn-outline'}`}
-                >
-                  Escolher Plano
-                </Link>
+            <div className="card p-6 border border-accent shadow-lg relative">
+              <div className="absolute -top-3 right-6 bg-accent text-primary text-xs font-bold px-3 py-1 rounded-full">
+                Popular
               </div>
-            ))}
+              <h3 className="text-xl font-bold mb-1">Plano Vitalício</h3>
+              <div className="mb-4">
+                <span className="text-3xl font-bold">R$ 1.500,00</span>
+                <div className="text-sm text-text-light mt-1">+ R$ 29,90/mês</div>
+              </div>
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-start text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
+                  <span>Acesso vitalício à plataforma</span>
+                </li>
+                <li className="flex items-start text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
+                  <span>Upload ilimitado de fotos</span>
+                </li>
+                <li className="flex items-start text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
+                  <span>Sem comissão nas vendas</span>
+                </li>
+                <li className="flex items-start text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
+                  <span>Relatórios detalhados</span>
+                </li>
+                <li className="flex items-start text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
+                  <span>Suporte prioritário</span>
+                </li>
+              </ul>
+              <button 
+                onClick={handleBePhotographer}
+                className="btn-accent w-full"
+              >
+                <Camera className="w-4 h-4 mr-2" />
+                Escolher Plano
+              </button>
+            </div>
+
+            <div className="card p-6 border border-gray-200">
+              <h3 className="text-xl font-bold mb-1">Plano Gratuito</h3>
+              <div className="mb-4">
+                <span className="text-3xl font-bold">R$ 0,00</span>
+                <div className="text-sm text-text-light mt-1">Sem mensalidade</div>
+              </div>
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-start text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
+                  <span>Comissão de 30% por foto</span>
+                </li>
+                <li className="flex items-start text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
+                  <span>Upload ilimitado de fotos</span>
+                </li>
+                <li className="flex items-start text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
+                  <span>Relatórios básicos</span>
+                </li>
+                <li className="flex items-start text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 flex-shrink-0" />
+                  <span>Suporte por email</span>
+                </li>
+              </ul>
+              <button 
+                onClick={handleBePhotographer}
+                className="btn-outline w-full"
+              >
+                <Camera className="w-4 h-4 mr-2" />
+                Escolher Plano
+              </button>
+            </div>
           </div>
         </div>
       </div>
